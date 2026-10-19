@@ -10,11 +10,11 @@ const perguntas = [
     alternativas: [
       {
         texto: "Educação.",
-        afirmacao: "afirmacao"
+        afirmacao: "Sua gestão priorizou a educação para preparar as futuras gerações."
       },
       {
         texto: "Saúde.",
-        afirmacao: "afirmacao"
+        afirmacao: "Sua gestão priorizou o atendimento médico de urgência à população."
 
       }
     ]
@@ -24,11 +24,11 @@ const perguntas = [
     alternativas: [
       {
         texto: "Investir em infraestrutura.",
-        afirmacao: "afirmacao"
+        afirmacao: "Modernizou a rede de saneamento para conter os vazamentos."
       },
       {
         texto: "Criar campanhas de conscientização.",
-        afirmacao: "afirmacao"
+        afirmacao: "Engajou os moradores no consumo consciente dos recursos hídricos."
       }
     ]
   },
@@ -37,11 +37,11 @@ const perguntas = [
     alternativas: [
       {
         texto: "Aumentar a coleta.",
-        afirmacao: "afirmacao"
+        afirmacao: "Ampliou a frota de coleta, mantendo os bairros limpos."
       },
       {
         texto: "Investir em reciclagem.",
-        afirmacao: "afirmacao"
+        afirmacao: "Criou cooperativas de reciclagem e gerou novos empregos."
       }
     ]
   },
@@ -50,11 +50,11 @@ const perguntas = [
     alternativas: [
       {
         texto: " Melhorar o transporte público.",
-        afirmacao: "afirmacao"
+        afirmacao: "Apostou na mobilidade urbana e no transporte coletivo."
       },
       {
         texto: "Construir novas vias.",
-        afirmacao: "afirmacao"
+        afirmacao: "Expandiu as vias urbanas para aliviar os gargalos no tráfego."
       }
     ]
 
@@ -64,11 +64,11 @@ const perguntas = [
     alternativas: [
       {
         texto: " A cidade ficou mais sustentável.",
-        afirmacao: "afirmacao"
+        afirmacao: "Ao final do mandato, a cidade se tornou uma referência em desenvolvimento sustentável."
       },
       {
         texto: "A cidade melhorou economicamente, mas ainda enfrenta problemas ambientais.",
-        afirmacao: "afirmacao"
+        afirmacao: "Ao final do mandato, a economia local cresceu forte, embora desafios ambientais ainda persistam."
 
       }
     ]
@@ -80,8 +80,13 @@ let perguntaAtual;
 let historiaFinal = "";
 
 function mostraPergunta() {
+  if(atual>= perguntas.length){
+    mostraResultado();
+    return;
+  }
   perguntaAtual = perguntas[atual];
   caixaPerguntas.textContent = perguntaAtual.enunciado
+  caixaAlternativas.textContent = "";
   mostraAlternativas();
 }
 
@@ -94,9 +99,17 @@ function mostraAlternativas() {
   }
 }
 function respostaSelecionada(opcaoSelecionada) {
-  const afirmacoes = opcaoSelecionada.afirmacoes;
-  historiaFinal += afirmacoes + " ";
+  const afirmacao = opcaoSelecionada.afirmacao;
+  historiaFinal += afirmacao + "";
   atual++;
   mostraPergunta();
 }
+
+function mostraResultado(){
+  caixaPerguntas.textContent = "Em 2030 ...";
+  textoResultado.textContent = historiaFinal;
+  caixaAlternativas.textContent = "";
+}
+
+
 mostraPergunta();
